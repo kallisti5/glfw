@@ -103,6 +103,9 @@ elseif (WIN32)
 elseif (APPLE)
     set(_GLFW_COCOA 1)
     message(STATUS "Using Cocoa for window creation")
+elseif (HAIKU)
+    set(_GLFW_HGL 1)
+    message(STATUS "Using Haiku GL Kit for window creation")
 elseif (UNIX)
     set(_GLFW_X11 1)
     message(STATUS "Using X11 for window creation")
@@ -138,7 +141,6 @@ endif()
 # Use Win32 for window creation
 #--------------------------------------------------------------------
 if (_GLFW_WIN32)
-
     list(APPEND glfw_PKG_LIBS "-lgdi32")
 
     if (GLFW_USE_HYBRID_HPG)
@@ -185,6 +187,15 @@ if (_GLFW_X11)
     if (NOT X11_Xshape_INCLUDE_PATH)
         message(FATAL_ERROR "X Shape headers not found; install libxext development package")
     endif()
+endif()
+
+#--------------------------------------------------------------------
+# Use Haiku's OpenGL kit for window creation
+#--------------------------------------------------------------------
+if (_GLFW_HGL)
+
+    list(APPEND glfw_LIBRARIES
+        "-lGL")
 endif()
 
 #--------------------------------------------------------------------

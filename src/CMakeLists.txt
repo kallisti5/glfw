@@ -29,6 +29,11 @@ elseif (_GLFW_WAYLAND)
                                 wl_init.c wl_monitor.c wl_window.c posix_time.c
                                 posix_thread.c xkb_unicode.c egl_context.c
                                 osmesa_context.c)
+elseif (_GLFW_HGL)
+    target_sources(glfw PRIVATE hgl_platform.h posix_time.h posix_thread.h
+                                egl_context.h osmesa_context null_init.c
+                                null_monitor.c hgl_window.c null_joystick.c
+                                posix_time.c posix_thread.c osmesa_context.c)
 elseif (_GLFW_OSMESA)
     target_sources(glfw PRIVATE null_platform.h null_joystick.h posix_time.h
                                 posix_thread.h osmesa_context.h null_init.c
